@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Simulador de Votación</title>
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#f4ece1">
-    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
     <style>
@@ -21,13 +21,21 @@
           100% { transform: scale(1); opacity: 1; }
         }
         .animate-bounce-in { animation: bounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        
+        .option-button {
+            border: 2px solid #e5e7eb;
+            background-color: white;
+            transition: background-color 0.2s;
+        }
+        .option-button:active {
+            background-color: #f3f4f6;
+        }
     </style>
 </head>
-<body class="bg-[#f4ece1] m-0 p-0 overflow-hidden touch-none font-sans">
+<body class="bg-[#f4ece1] m-0 p-0 overflow-hidden touch-none font-sans text-black">
     <div id="root"></div>
 
     <script type="text/babel">
-        // [TU CÓDIGO REACT ORIGINAL SE MANTIENE EXACTAMENTE IGUAL AQUÍ]
         const { useState, useEffect } = React;
 
         const App = () => {
@@ -65,18 +73,14 @@
                   {children}
                 </div>
                 <div className="w-[100px] h-full flex flex-col items-center justify-center text-yellow-500 font-bold opacity-90">
-                  <svg className="w-12 h-12 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <circle cx="12" cy="12" r="3"></circle>
-                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"></path>
-                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07m-7.07 0a5 5 0 0 1 0-7.07"></path>
-                  </svg>
+                  <div className="text-4xl mb-2">👆</div>
                   <span className="text-sm uppercase tracking-widest">votar</span>
                   <div className="mt-6 w-8 h-8 bg-blue-500 rounded shadow-lg"></div>
                 </div>
               </div>
 
               <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-[300px] h-[40px] bg-blue-600 rounded-b-2xl shadow-xl flex items-center justify-center border-t border-blue-400">
-                  <span className="text-white text-sm font-black uppercase tracking-[0.2em]">votar</span>
+                 <span className="text-white text-sm font-black uppercase tracking-[0.2em]">votar</span>
               </div>
             </div>
           );
@@ -84,31 +88,30 @@
           const InsertedBallot = () => (
             <div className="w-24 h-40 bg-white border-2 border-yellow-400 rounded-t-xl shadow-2xl flex flex-col relative p-1 transform translate-y-16 opacity-95">
               <div className="w-full h-6 bg-orange-500 text-white text-[8px] font-black flex items-center justify-center">BOLETA DE VOTACIÓN</div>
-              <div className="mt-auto mb-2 flex justify-center text-orange-500 animate-bounce">
-                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21l-9-9h6V3h6v9h6z"/></svg>
+              <div className="mt-auto mb-2 flex justify-center text-orange-500 animate-bounce text-2xl font-black">
+                ▼
               </div>
             </div>
           );
 
+          // Pasos del simulador
           const Step0 = () => (
             <div className="flex flex-col items-center justify-center h-full space-y-10 animate-fade-in px-4">
               <div className="text-center bg-white/80 backdrop-blur p-8 rounded-[32px] shadow-xl w-[700px] max-w-full border border-orange-100">
-                <p className="text-2xl text-gray-800 font-medium leading-relaxed">
+                <p className="text-2xl font-medium leading-relaxed">
                   <span className="font-bold">Presentá tu cédula de identidad civil</span> a los miembros de la mesa, quienes te entregarán <span className="font-bold">el boletín firmado</span>.
                 </p>
               </div>
               <div className="flex items-center justify-center space-x-10">
                 <div className="w-64 h-40 bg-blue-50 border-2 border-gray-300 rounded-xl shadow-lg flex flex-col relative overflow-hidden">
                   <div className="absolute top-0 w-full h-5 bg-red-100 flex gap-1 px-1">
-                      <div className="w-1/3 h-full bg-red-600"></div><div className="w-1/3 h-full bg-white"></div><div className="w-1/3 h-full bg-blue-600"></div>
+                     <div className="w-1/3 h-full bg-red-600"></div><div className="w-1/3 h-full bg-white"></div><div className="w-1/3 h-full bg-blue-600"></div>
                   </div>
                   <div className="mt-7 ml-3 flex gap-3">
-                    <div className="w-20 h-24 bg-gray-300 rounded-md border border-gray-400 flex items-center justify-center">
-                        <svg className="w-12 h-12 text-gray-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                    </div>
+                    <div className="w-20 h-24 bg-gray-300 rounded-md border border-gray-400 flex items-center justify-center text-5xl">🪪</div>
                     <div className="flex flex-col text-left">
-                        <span className="text-[10px] font-black text-gray-700 leading-tight uppercase">República del Paraguay</span>
-                        <span className="text-[8px] font-bold text-gray-500 uppercase">Cédula de Identidad</span>
+                        <span className="text-[10px] font-black leading-tight uppercase">República del Paraguay</span>
+                        <span className="text-[8px] font-bold uppercase">Cédula de Identidad</span>
                         <div className="mt-2 space-y-1">
                             <div className="w-24 h-1 bg-gray-200"></div>
                             <div className="w-20 h-1 bg-gray-200"></div>
@@ -117,99 +120,94 @@
                     </div>
                   </div>
                 </div>
-
-                <svg className="w-14 h-14 text-gray-800" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                
-                <div className="w-32 h-56 bg-white border-2 border-yellow-400 rounded-lg shadow-xl flex flex-col relative p-2">
-                   <div className="w-full h-8 bg-orange-500 text-white text-[10px] font-black flex items-center justify-center text-center leading-none">BOLETA DE VOTACIÓN</div>
+                <div className="text-6xl">➡️</div>
+                <div className="w-32 h-56 bg-white border-2 border-yellow-400 rounded-lg shadow-xl flex flex-col relative p-2 text-center">
+                   <div className="w-full h-8 bg-orange-500 text-white text-[10px] font-black flex items-center justify-center leading-none uppercase">Boleta de votación</div>
                    <div className="flex-1 mt-3 flex flex-col gap-2 items-center">
                       <div className="w-24 h-[3px] bg-blue-800"></div>
                       <div className="w-24 h-[3px] bg-red-800"></div>
-                      <span className="text-[9px] text-gray-600 mt-4 font-black text-center px-1 uppercase leading-tight">Inserte del lado de la flecha</span>
-                      <div className="mt-auto mb-2 text-orange-500">
-                        <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21l-9-9h6V3h6v9h6z"/></svg>
-                      </div>
+                      <span className="text-[9px] mt-4 font-black px-1 uppercase leading-tight">Inserte del lado de la flecha</span>
+                      <div className="mt-auto mb-2 text-orange-500 text-3xl">▼</div>
                    </div>
                 </div>
               </div>
-              <button onClick={nextStep} className="bg-green-700 text-white font-black text-4xl py-4 px-20 rounded-2xl shadow-2xl hover:bg-green-800 active:scale-95 transition-all uppercase tracking-widest">
-                OK
-              </button>
+              <button onClick={nextStep} className="bg-green-700 text-white font-black text-4xl py-4 px-20 rounded-2xl shadow-2xl hover:bg-green-800 active:scale-95 transition-all uppercase tracking-widest">OK</button>
             </div>
           );
 
           const Step1 = () => (
             <div className="flex flex-col items-center justify-center h-full space-y-12 animate-fade-in relative px-4">
               <div className="text-center bg-white/90 p-6 rounded-2xl shadow-xl z-10 border-2 border-orange-200">
-                <p className="text-3xl text-gray-800 font-black">
-                  Colocá el boletín en la ranura<br/><span className="font-normal text-2xl">como lo indica la flecha.</span>
-                </p>
+                <p className="text-3xl font-black">Colocá el boletín en la ranura<br/><span className="font-normal text-2xl">como lo indica la flecha.</span></p>
               </div>
               <div className="relative">
-                <MachineFrame 
-                  slotContent={
-                    <div className="w-28 h-40 bg-white border-4 border-yellow-400 rounded-t-2xl shadow-2xl flex flex-col relative p-1 transform translate-y-8 animate-bounce">
-                      <div className="w-full h-8 bg-orange-500 text-white text-[10px] font-black flex items-center justify-center">BOLETA DE VOTACIÓN</div>
-                      <div className="mt-auto mb-2 flex justify-center text-orange-500">
-                        <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21l-9-9h6V3h6v9h6z"/></svg>
-                      </div>
-                    </div>
-                  }
-                >
+                <MachineFrame slotContent={<div className="w-28 h-40 bg-white border-4 border-yellow-400 rounded-t-2xl shadow-2xl flex flex-col relative p-1 transform translate-y-8 animate-bounce">
+                  <div className="w-full h-8 bg-orange-500 text-white text-[10px] font-black flex items-center justify-center uppercase">Boleta de votación</div>
+                  <div className="mt-auto mb-2 flex justify-center text-orange-500 text-3xl">▼</div>
+                </div>}>
                   <div className="w-full h-full bg-gray-100 flex items-center justify-center">
                      <span className="text-gray-400 text-2xl font-black animate-pulse uppercase tracking-widest">Inserte el boletín...</span>
                   </div>
                 </MachineFrame>
               </div>
               <div className="absolute bottom-10 left-10">
-                <button onClick={nextStep} className="bg-green-700 text-white font-black text-4xl py-4 px-12 rounded-2xl shadow-2xl hover:bg-green-800 active:scale-95 transition-all">
-                  OK
-                </button>
+                <button onClick={nextStep} className="bg-green-700 text-white font-black text-4xl py-4 px-12 rounded-2xl shadow-2xl hover:bg-green-800 active:scale-95 transition-all">OK</button>
               </div>
             </div>
           );
 
           const Step2 = () => (
             <div className="flex flex-col items-center justify-center h-full relative animate-fade-in w-full max-w-5xl px-4">
-              <p className="text-2xl text-gray-800 mb-8 text-center leading-tight">
-                Candidatos a la <span className="font-black underline decoration-blue-500">Intendencia Municipal</span>.<br/>
-                Elegí la <span className="font-black text-red-600 bg-red-50 px-2 rounded">Lista 24, Sebastián Remezowski.</span>
-              </p>
+              <p className="text-2xl mb-8 text-center leading-tight">Candidatos a la <span className="font-black underline decoration-blue-500">Intendencia Municipal</span>.</p>
               <div className="relative">
                 <MachineFrame slotContent={<InsertedBallot />}>
                   <div className="text-sm text-center font-black mb-3 border-b-2 border-gray-300 pb-2 uppercase tracking-widest text-blue-900">Intendente Municipal</div>
-                  <div className="grid grid-cols-2 gap-4 h-full pb-4">
-                    <div className="border-2 border-gray-300 rounded-xl bg-gray-50 flex items-center justify-center flex-col grayscale opacity-30">
-                      <span className="text-xs font-black">MOVIMIENTO 1</span>
-                      <div className="flex items-center gap-3 mt-2"><div className="w-12 h-16 bg-gray-300 rounded"></div><span className="font-black text-2xl">LISTA</span></div>
-                    </div>
-                    <div 
-                      onClick={nextStep}
-                      className="border-[4px] border-blue-600 rounded-xl bg-white flex flex-col items-center justify-center cursor-pointer hover:bg-blue-50 transition-all shadow-lg hover:scale-[1.02]"
-                    >
-                      <span className="text-xs font-black text-center leading-tight mb-2 text-blue-800 uppercase">MOVIMIENTO<br/>ENCARNACIÓN NOS UNE</span>
-                      <div className="flex items-center gap-4">
-                        <div className="w-16 h-20 bg-gray-200 border-2 border-gray-300 overflow-hidden rounded-md shadow-inner flex items-center justify-center">
-                            <img 
-                                src="appcheba.jpg" 
-                                alt="Sebastián Remezowski" 
-                                className="w-full h-full object-cover object-top" 
-                                onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = '<span class="text-xs font-bold text-gray-400">SR</span>'; }}
-                            />
+                  <div className="flex flex-col h-full justify-between pb-4">
+                    <div className="grid grid-cols-3 gap-3">
+                      <div className="option-button rounded-xl flex items-center justify-center flex-col p-2 cursor-pointer">
+                        <span className="text-[9px] font-black uppercase text-center">Fuerza Republicana</span>
+                        <div className="flex items-center gap-2 mt-1">
+                            <div className="w-12 h-16 bg-gray-100 border border-gray-300 rounded overflow-hidden flex items-center justify-center text-xs font-bold text-gray-400">
+                                <img src="app3.jpg" className="w-full h-full object-cover object-top" onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = 'DA'; }} />
+                            </div>
+                            <div className="flex flex-col items-center">
+                                <span className="font-black text-xs">LISTA</span>
+                                <span className="font-black text-2xl leading-none">4</span>
+                            </div>
                         </div>
-                        <div className="flex flex-col items-center">
-                            <span className="font-black text-lg text-blue-600">LISTA</span>
-                            <span className="font-black text-5xl leading-none text-blue-900">24</span>
-                        </div>
+                        <span className="mt-1 font-black text-[10px] uppercase">Diego Aquino</span>
                       </div>
-                      <span className="mt-2 font-black text-sm text-gray-800 uppercase text-center leading-none">Sebastian<br/>Remezowski</span>
+                      <div onClick={nextStep} className="option-button rounded-xl flex flex-col items-center justify-center cursor-pointer p-2">
+                        <span className="text-[9px] font-black text-center leading-tight mb-1 uppercase">ENCARNACIÓN NOS UNE</span>
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-16 bg-gray-100 border border-gray-300 rounded overflow-hidden flex items-center justify-center text-xs font-bold text-gray-400">
+                              <img src="appcheba.jpg" alt="Sebastián Remezowski" className="w-full h-full object-cover object-top" onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = 'SR'; }} />
+                          </div>
+                          <div className="flex flex-col items-center">
+                             <span className="font-black text-xs">LISTA</span>
+                             <span className="font-black text-3xl leading-none">24</span>
+                          </div>
+                        </div>
+                        <span className="mt-1 font-black text-[11px] uppercase text-center leading-none">Sebastian<br/>Remezowski</span>
+                      </div>
+                      <div className="option-button rounded-xl flex items-center justify-center flex-col p-2 cursor-pointer">
+                        <span className="text-[9px] font-black uppercase text-center">Somos Encarnacion</span>
+                        <div className="flex items-center gap-2 mt-1">
+                            <div className="w-12 h-16 bg-gray-100 border border-gray-300 rounded overflow-hidden flex items-center justify-center text-xs font-bold text-gray-400">
+                                <img src="app39.jpg" className="w-full h-full object-cover object-top" onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = 'EF'; }} />
+                            </div>
+                            <div className="flex flex-col items-center">
+                                <span className="font-black text-xs">LISTA</span>
+                                <span className="font-black text-2xl leading-none">39</span>
+                            </div>
+                        </div>
+                        <span className="mt-1 font-black text-[10px] uppercase">Eduardo Florentin</span>
+                      </div>
                     </div>
-                    <div className="border-2 border-gray-300 rounded-xl bg-gray-50 flex items-center justify-center flex-col grayscale opacity-30">
-                      <span className="text-xs font-black">MOVIMIENTO 3</span>
-                       <div className="flex items-center gap-3 mt-2"><div className="w-12 h-16 bg-gray-300 rounded"></div><span className="font-black text-2xl">LISTA</span></div>
-                    </div>
-                    <div className="border-2 border-gray-400 rounded-xl bg-white flex items-center justify-center text-center hover:bg-gray-50 transition-colors">
-                        <span className="font-black text-2xl leading-tight uppercase text-gray-700">VOTO EN<br/>BLANCO</span>
+                    <div className="flex justify-end mt-4">
+                        <div className="w-1/3 option-button rounded-xl flex items-center justify-center text-center py-4 cursor-pointer">
+                           <span className="font-black text-lg leading-tight uppercase">VOTO EN<br/>BLANCO</span>
+                        </div>
                     </div>
                   </div>
                 </MachineFrame>
@@ -219,143 +217,115 @@
 
           const Step3 = () => (
             <div className="flex flex-col items-center justify-center h-full relative animate-fade-in w-full max-w-5xl px-4">
-              <p className="text-2xl text-gray-800 mb-8 text-center leading-tight">
-                Listas para <span className="font-black underline decoration-blue-500">Candidatos a Concejal</span>.<br/>
-                Elegí la opción <span className="font-black text-red-600 bg-red-50 px-2 rounded">Lista 24S</span>
-              </p>
+              <p className="text-2xl mb-8 text-center leading-tight text-black">Listas para <span className="font-black underline decoration-blue-500">Candidatos a Concejal</span>.</p>
               <div className="relative">
                 <MachineFrame slotContent={<InsertedBallot />}>
                   <div className="text-sm text-center font-black mb-3 border-b-2 border-gray-300 pb-2 uppercase tracking-widest text-blue-900">Candidatos a Concejal</div>
-                  <div className="grid grid-cols-3 gap-3 h-2/3">
-                    <div className="border-2 border-gray-300 rounded-xl bg-gray-50 flex flex-col items-center justify-center grayscale opacity-30">
-                      <span className="text-[10px] font-bold">MOVIMIENTO 1</span>
-                      <span className="font-black text-2xl mt-2">LISTA</span>
+                  <div className="flex flex-col h-full justify-between pb-4">
+                    <div className="grid grid-cols-4 gap-2">
+                        <div className="option-button rounded-xl flex flex-col items-center justify-center p-1 cursor-pointer">
+                          <span className="text-[8px] font-black text-center leading-tight uppercase mb-1">Fuerza Republicana</span>
+                          <span className="font-black text-xs">LISTA</span>
+                          <span className="font-black text-2xl">4</span>
+                        </div>
+                        <div className="option-button rounded-xl flex flex-col items-center justify-center p-1 cursor-pointer">
+                          <span className="text-[8px] font-black text-center leading-tight uppercase mb-1">Encarnacion nos une</span>
+                          <span className="font-black text-xs">LISTA</span>
+                          <span className="font-black text-2xl">24R</span>
+                        </div>
+                        <div onClick={nextStep} className="option-button rounded-xl flex flex-col items-center justify-center cursor-pointer p-1">
+                          <span className="text-[8px] font-black text-center leading-tight uppercase mb-1">ENCARNACIÓN NOS UNE</span>
+                          <span className="font-black text-xs">LISTA</span>
+                          <span className="font-black text-3xl leading-none">24S</span>
+                        </div>
+                        <div className="option-button rounded-xl flex flex-col items-center justify-center p-1 cursor-pointer">
+                          <span className="text-[8px] font-black text-center leading-tight uppercase mb-1">Somos encarnacion</span>
+                          <span className="font-black text-xs">LISTA</span>
+                          <span className="font-black text-2xl">39</span>
+                        </div>
                     </div>
-                    <div className="border-2 border-gray-300 rounded-xl bg-gray-50 flex flex-col items-center justify-center grayscale opacity-30">
-                      <span className="text-[10px] font-bold">MOVIMIENTO 2</span>
-                      <span className="font-black text-2xl mt-2">LISTA</span>
+                    <div className="flex justify-end mt-4">
+                         <div className="w-1/4 option-button rounded-xl flex items-center justify-center text-center py-3 cursor-pointer">
+                            <span className="font-black text-base leading-tight uppercase text-black">Voto en<br/>Blanco</span>
+                         </div>
                     </div>
-                    <div 
-                      onClick={nextStep}
-                      className="border-[4px] border-blue-600 rounded-xl bg-white flex flex-col items-center justify-center cursor-pointer hover:bg-blue-50 transition-all shadow-lg hover:scale-[1.02]"
-                    >
-                      <span className="text-[10px] font-black text-center leading-tight px-2 text-blue-800 uppercase mb-1">MOVIMIENTO<br/>ENCARNACIÓN NOS UNE</span>
-                      <span className="font-black text-xl mt-1 text-blue-600">LISTA</span>
-                      <span className="font-black text-4xl leading-none text-blue-900">24S</span>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3 h-1/3 mt-3">
-                     <div className="border-2 border-gray-300 rounded-xl bg-gray-50 flex flex-col items-center justify-center grayscale opacity-30">
-                        <span className="text-[10px] font-bold">MOVIMIENTO 4</span>
-                        <span className="font-black text-xl mt-1">LISTA</span>
-                     </div>
-                     <div className="border-2 border-gray-400 rounded-xl bg-white flex items-center justify-center text-center hover:bg-gray-50">
-                        <span className="font-black text-2xl leading-tight uppercase text-gray-700">Voto en<br/>Blanco</span>
-                     </div>
                   </div>
                 </MachineFrame>
               </div>
             </div>
           );
 
-          const Step4 = () => (
-            <div className="flex flex-col items-center justify-center h-full relative animate-fade-in w-full max-w-5xl px-4">
-              <p className="text-2xl text-gray-800 mb-4 text-center absolute -top-16">
-                Elegí la <span className="font-black text-red-600 bg-red-50 px-3 py-1 rounded-xl shadow-sm">Opción 3: Dennis Fraulob</span>
-              </p>
-              <div className="relative mt-20">
-                <MachineFrame slotContent={<InsertedBallot />}>
-                  <div className="text-sm text-center font-black border-b-2 border-gray-300 pb-2 mb-2 bg-gray-100 flex items-center justify-center gap-4">
-                    <span className="uppercase text-gray-600">Concejales</span>
-                    <span className="text-xl font-black text-blue-900">Lista 24S</span>
-                    <span className="uppercase text-[10px] text-blue-700 bg-blue-50 px-2 rounded">Encarnación Nos Une</span>
-                  </div>
-                  <div className="grid grid-cols-4 grid-rows-3 gap-2 flex-1 pb-2">
-                    {[1, 2].map(num => (
-                      <div key={num} className="border-2 border-gray-200 rounded-lg bg-white flex items-center p-2 grayscale opacity-25">
-                         <div className="w-10 h-14 bg-gray-200 border border-gray-300 mr-2 flex items-end justify-center overflow-hidden shrink-0"><div className="w-7 h-7 bg-gray-400 rounded-t-full"></div></div>
-                         <div className="flex flex-col leading-none">
-                            <span className="text-[8px] font-black text-gray-400">OPC</span>
-                            <span className="text-xl font-black text-gray-300">{num}</span>
-                         </div>
-                      </div>
-                    ))}
+          const Step4 = () => {
+            const candidates = [
+              { num: 1, name: "César Rojas", img: "01.jpg" },
+              { num: 2, name: "Adriana Villalba", img: "02.jpg" },
+              { num: 3, name: "Dennis Fraulob", img: "appdennis.png" },
+              { num: 4, name: "Facu González", img: "04.jpg" },
+              { num: 5, name: "Luis Dávalos", img: "05.jpg" },
+              { num: 6, name: "José Jorge Enríquez", img: "06.jpg" },
+              { num: 7, name: "Saúl Gamarra", img: "07.jpg" },
+              { num: 8, name: "Daniel Ferreira", img: "08.jpg" },
+              { num: 9, name: "Gladys Soto", img: "09.jpg" },
+              { num: 10, name: "Luis María Guerrero", img: "10.jpg" },
+              { num: 11, name: "Aristides Martínez", img: "11.jpg" },
+              { num: 12, name: "Sol García", img: "12.jpg" }
+            ];
 
-                    <div 
-                      onClick={nextStep}
-                      className="border-[4px] border-red-600 rounded-xl bg-white flex items-center p-2 cursor-pointer hover:bg-red-50 transition-all shadow-xl hover:scale-[1.05] relative z-20 ring-4 ring-red-100"
-                    >
-                       <div className="w-12 h-16 bg-gray-100 border-2 border-gray-300 mr-2 shrink-0 overflow-hidden rounded shadow-sm flex items-center justify-center">
-                            <img 
-                                src="appdennis.png" 
-                                alt="Dennis Fraulob" 
-                                className="w-full h-full object-cover object-top" 
-                                onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = '<span class="text-[10px] font-bold text-gray-400">DF</span>'; }}
-                            />
-                       </div>
-                       <div className="flex flex-col leading-tight">
-                          <span className="text-[10px] font-black text-red-600 uppercase">OPCIÓN</span>
-                          <span className="text-3xl font-black text-gray-900">3</span>
-                          <span className="text-[10px] font-black text-blue-900 uppercase leading-none mt-1">Dennis<br/>Fraulob</span>
-                       </div>
+            return (
+              <div className="flex flex-col items-center justify-center h-full relative animate-fade-in w-full max-w-5xl px-4">
+                <p className="text-2xl mb-4 text-center absolute -top-16 font-black text-black">Elegí la <span className="text-red-600 bg-red-50 px-3 py-1 rounded-xl shadow-sm uppercase">Opción 3: Dennis Fraulob</span></p>
+                <div className="relative mt-20">
+                  <MachineFrame slotContent={<InsertedBallot />}>
+                    <div className="text-sm text-center font-black border-b-2 border-gray-300 pb-2 mb-2 bg-gray-100 flex items-center justify-center gap-4">
+                      <span className="uppercase text-black">Concejales</span>
+                      <span className="text-xl font-black text-black">Lista 24S</span>
                     </div>
-
-                    {[4, 5, 6, 7, 8, 9, 10, 11, 12].map(num => (
-                      <div key={num} className="border-2 border-gray-200 rounded-lg bg-white flex items-center p-2 grayscale opacity-25">
-                         <div className="w-10 h-14 bg-gray-200 border border-gray-300 mr-2 flex items-end justify-center overflow-hidden shrink-0"><div className="w-7 h-7 bg-gray-400 rounded-t-full"></div></div>
-                         <div className="flex flex-col leading-none">
-                            <span className="text-[8px] font-black text-gray-400">OPC</span>
-                            <span className="text-xl font-black text-gray-300">{num}</span>
-                         </div>
-                      </div>
-                    ))}
-                  </div>
-                </MachineFrame>
+                    <div className="grid grid-cols-4 grid-rows-3 gap-2 flex-1 pb-2 overflow-hidden">
+                      {candidates.map(cand => (
+                        <div key={cand.num} onClick={cand.num === 3 ? nextStep : null} className="option-button rounded-lg flex items-center p-2 cursor-pointer">
+                           <div className="w-12 h-16 border-2 border-gray-300 mr-2 shrink-0 overflow-hidden rounded shadow-sm flex items-center justify-center bg-gray-100 text-[10px] font-bold text-gray-400">
+                                <img src={cand.img} alt={cand.name} className="w-full h-full object-cover object-top" onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = cand.name.split(' ').map(n=>n[0]).join(''); }} />
+                           </div>
+                           <div className="flex flex-col leading-tight min-w-0">
+                              <span className="text-[9px] font-black uppercase text-black">OPC</span>
+                              <span className="text-2xl font-black text-black">{cand.num}</span>
+                              <span className="text-[8px] font-black uppercase leading-none mt-1 truncate text-black">{cand.name.split(' ')[0]}<br/>{cand.name.split(' ')[1] || ''}</span>
+                           </div>
+                        </div>
+                      ))}
+                    </div>
+                  </MachineFrame>
+                </div>
               </div>
-            </div>
-          );
+            );
+          };
 
           const Step5 = () => (
             <div className="flex flex-col items-center justify-center h-full relative animate-fade-in w-full max-w-5xl px-4">
-              <p className="text-3xl text-gray-800 mb-6 text-center font-black">
-                Confirmar selección e <span className="text-green-600 underline">Imprimir</span>
-              </p>
+              <p className="text-3xl mb-6 text-center font-black text-black">Confirmar selección e <span className="text-green-600 underline">Imprimir</span></p>
               <div className="relative">
                 <MachineFrame slotContent={<InsertedBallot />}>
-                  <div className="text-sm text-center font-black border-b-2 border-gray-300 pb-2 mb-2 bg-blue-900 text-white uppercase tracking-[0.3em]">
-                    Resumen de Voto
-                  </div>
+                  <div className="text-sm text-center font-black border-b-2 border-gray-300 pb-2 mb-2 bg-blue-900 text-white uppercase tracking-[0.3em]">Resumen de Voto</div>
                   <div className="flex gap-4 h-full pb-3">
                      <div className="flex-1 border-2 border-gray-200 rounded-2xl bg-white flex flex-col items-center p-4 shadow-sm">
                         <span className="text-[10px] font-black text-center leading-tight mb-3 text-gray-500 uppercase tracking-widest">Intendente Municipal</span>
                         <div className="flex gap-4 items-center flex-1">
-                           <div className="w-20 h-24 bg-gray-200 border-2 border-gray-200 overflow-hidden rounded-lg shadow-md flex items-center justify-center">
-                                <img 
-                                    src="appcheba.jpg" 
-                                    alt="Sebastián Remezowski" 
-                                    className="w-full h-full object-cover object-top" 
-                                    onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = '<span class="text-xs font-bold text-gray-400">SR</span>'; }}
-                                />
+                           <div className="w-20 h-24 bg-gray-200 border-2 border-gray-200 overflow-hidden rounded-lg flex items-center justify-center text-xs font-bold text-gray-400">
+                                <img src="appcheba.jpg" alt="Sebastián Remezowski" className="w-full h-full object-cover object-top" onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = 'SR'; }} />
                            </div>
                            <div className="flex flex-col items-center justify-center">
                               <span className="font-black text-lg text-blue-600">LISTA</span>
                               <span className="font-black text-5xl leading-none text-blue-900">24</span>
                            </div>
                         </div>
-                        <span className="text-lg font-black mt-3 text-gray-800 uppercase text-center leading-none">Sebastián<br/>Remezowski</span>
-                        <button onClick={() => goToStep(2)} className="mt-4 bg-gray-100 text-gray-600 text-xs px-6 py-2 rounded-xl font-black hover:bg-gray-200 active:scale-95 transition-all border border-gray-200 uppercase">Modificar</button>
+                        <span className="text-lg font-black mt-3 uppercase text-center leading-none text-black">Sebastián<br/>Remezowski</span>
+                        <button onClick={() => goToStep(2)} className="mt-4 bg-gray-100 text-gray-600 text-xs px-6 py-2 rounded-xl font-black border border-gray-200 uppercase">Modificar</button>
                      </div>
-
                      <div className="flex-1 border-2 border-gray-200 rounded-2xl bg-white flex flex-col items-center p-4 shadow-sm">
                         <span className="text-[10px] font-black text-center leading-tight mb-3 text-gray-500 uppercase tracking-widest">Concejal Municipal</span>
                         <div className="flex gap-4 items-center flex-1">
-                           <div className="w-20 h-24 bg-gray-100 border-2 border-gray-200 overflow-hidden rounded-lg shadow-md flex items-center justify-center">
-                                <img 
-                                    src="appdennis.png" 
-                                    alt="Dennis Fraulob" 
-                                    className="w-full h-full object-cover object-top" 
-                                    onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = '<span class="text-xs font-bold text-gray-400">DF</span>'; }}
-                                />
+                           <div className="w-20 h-24 bg-gray-100 border-2 border-gray-200 overflow-hidden rounded-lg flex items-center justify-center text-xs font-bold text-gray-400">
+                                <img src="appdennis.png" alt="Dennis Fraulob" className="w-full h-full object-cover object-top" onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = 'DF'; }} />
                            </div>
                            <div className="flex flex-col items-center justify-center">
                               <span className="font-black text-sm text-blue-600">LISTA 24S</span>
@@ -363,19 +333,12 @@
                               <span className="font-black text-4xl leading-none text-blue-900">3</span>
                            </div>
                         </div>
-                        <span className="text-lg font-black mt-3 text-gray-800 uppercase text-center leading-none">Dennis<br/>Fraulob</span>
-                        <button onClick={() => goToStep(4)} className="mt-4 bg-gray-100 text-gray-600 text-xs px-6 py-2 rounded-xl font-black hover:bg-gray-200 active:scale-95 transition-all border border-gray-200 uppercase">Modificar</button>
+                        <span className="text-lg font-black mt-3 uppercase text-center leading-none text-black">Dennis<br/>Fraulob</span>
+                        <button onClick={() => goToStep(4)} className="mt-4 bg-gray-100 text-gray-600 text-xs px-6 py-2 rounded-xl font-black border border-gray-200 uppercase">Modificar</button>
                      </div>
-
                      <div className="w-[120px] flex flex-col gap-3">
-                        <button onClick={() => goToStep(2)} className="flex-1 bg-orange-500 text-white rounded-2xl flex flex-col items-center justify-center font-black text-xs hover:bg-orange-600 active:scale-95 transition-all shadow-lg border-b-4 border-orange-700 uppercase">
-                           <svg className="w-8 h-8 mb-2" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                           Reiniciar
-                        </button>
-                        <button onClick={nextStep} className="flex-[2] bg-green-600 text-white rounded-2xl flex flex-col items-center justify-center font-black text-xl hover:bg-green-700 active:scale-95 transition-all shadow-lg border-b-4 border-green-800 border-x-2 border-green-400 uppercase tracking-tighter">
-                           <svg className="w-10 h-10 mb-2" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24"><path d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
-                           Imprimir
-                        </button>
+                        <button onClick={() => goToStep(2)} className="flex-1 bg-orange-500 text-white rounded-2xl flex flex-col items-center justify-center font-black text-xs uppercase shadow-lg border-b-4 border-orange-700">🔄<br/>Reiniciar</button>
+                        <button onClick={nextStep} className="flex-[2] bg-green-600 text-white rounded-2xl flex flex-col items-center justify-center font-black text-xl uppercase shadow-lg border-b-4 border-green-800 border-x-2 border-green-400 tracking-tighter">🖨️<br/>Imprimir</button>
                      </div>
                   </div>
                 </MachineFrame>
@@ -390,12 +353,10 @@
                 <span className="text-[120px] mb-6 block drop-shadow-lg">✅</span>
                 <h1 className="text-7xl font-black text-green-600 tracking-tighter mb-4">¡VOTO LISTO!</h1>
                 <p className="text-gray-500 text-2xl font-medium max-w-md">Tu boletín se ha impreso correctamente.</p>
-                <div className="mt-8 p-4 bg-blue-50 rounded-2xl border-2 border-blue-100">
+                <div className="mt-8 p-4 bg-blue-50 rounded-2xl border-2 border-blue-100 text-black">
                     <p className="text-blue-800 text-lg font-black uppercase">Recordá depositarlo en la urna</p>
                 </div>
-                <button onClick={() => setStep(0)} className="mt-12 bg-blue-600 text-white font-black py-5 px-12 rounded-[24px] hover:bg-blue-700 shadow-2xl active:scale-95 transition-all text-2xl uppercase tracking-widest">
-                  Finalizar
-                </button>
+                <button onClick={() => setStep(0)} className="mt-12 bg-blue-600 text-white font-black py-5 px-12 rounded-[24px] hover:bg-blue-700 shadow-2xl active:scale-95 transition-all text-2xl uppercase tracking-widest">Finalizar</button>
               </div>
             </div>
           );
@@ -415,27 +376,16 @@
 
           return (
             <div className="w-screen h-screen flex items-center justify-center relative overflow-hidden">
-                <div style={{ transform: `scale(${scale})`, transformOrigin: 'center center' }} className="w-full h-full flex items-center justify-center">
-                   {renderStep()}
-                </div>
-                <div className="absolute bottom-4 right-6 text-xs text-gray-400 opacity-40 select-none pointer-events-none z-50 font-black italic uppercase tracking-widest">
-                  powered by NeryZd
-                </div>
+               <div style={{ transform: `scale(${scale})`, transformOrigin: 'center center' }} className="w-full h-full flex items-center justify-center">
+                  {renderStep()}
+               </div>
+               <div className="absolute bottom-4 right-6 text-xs text-black opacity-40 select-none pointer-events-none z-50 font-black italic uppercase tracking-widest">powered by NeryZd</div>
             </div>
           );
         };
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
-
-        // --- REGISTRO DEL SERVICE WORKER ---
-        if ('serviceWorker' in navigator) {
-          window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js')
-              .then(reg => console.log('PWA lista para funcionar offline'))
-              .catch(err => console.log('Error al registrar PWA:', err));
-          });
-        }
     </script>
 </body>
 </html>
