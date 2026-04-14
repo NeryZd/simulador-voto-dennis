@@ -1,6 +1,6 @@
 {
-  "name": "Simulador de Votación TSJE",
-  "short_name": "Votación",
+  "name": "Simulador de Votación",
+  "short_name": "Voto",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#f4ece1",
@@ -9,7 +9,14 @@
     {
       "src": "appcheba.jpg",
       "sizes": "192x192",
-      "type": "image/jpeg"
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "appcheba.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
     }
   ]
 }
